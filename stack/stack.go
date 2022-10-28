@@ -1,4 +1,4 @@
-package stacks
+package stack
 
 type Stacks interface {
 	// 判断栈是否为空
