@@ -33,13 +33,15 @@ func (s *LinkedStack) Pop() (val interface{}, ok bool) {
 	}
 	val = s.ChainNode.Val
 	s.ChainNode = s.ChainNode.Next
+	s.StackSize--
 	return val, true
 }
 
 func (s *LinkedStack) Push(val interface{}) (ok bool) {
-	s.ChainNode.Next = &chainNode{
+	s.ChainNode = &chainNode{
 		Val:  val,
 		Next: s.ChainNode,
 	}
+	s.StackSize++
 	return true
 }
