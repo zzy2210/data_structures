@@ -1,64 +1,64 @@
 package arrayqueue
 
 type ArrayQueue struct {
-	queueFront int
-	queueBack  int
-	array      []interface{}
-	queueSize  int
+	QueueFront int
+	QueueBack  int
+	Array      []interface{}
+	QueueSize  int
 }
 
 func New() *ArrayQueue {
 	array := make([]interface{}, 4)
 	return &ArrayQueue{
-		queueFront: 0,
-		queueBack:  1,
-		array:      array,
-		queueSize:  0,
+		QueueFront: 0,
+		QueueBack:  0,
+		Array:      array,
+		QueueSize:  0,
 	}
 }
 
 func (q *ArrayQueue) Empty() bool {
 	// return q.queueFront == q.queueBack
-	return q.queueSize == 0
+	return q.QueueSize == 0
 }
 
 func (q *ArrayQueue) Size() int {
-	return q.queueSize
+	return q.QueueSize
 }
 
 func (q *ArrayQueue) Front() (interface{}, bool) {
 	if q.Empty() {
 		return nil, false
 	}
-	return q.array[q.queueFront+1], true
+	return q.Array[q.QueueFront+1], true
 }
 
 func (q *ArrayQueue) Back() (interface{}, bool) {
 	if q.Empty() {
 		return nil, false
 	}
-	return q.array[q.queueBack], true
+	return q.Array[q.QueueBack], true
 }
 
 func (q *ArrayQueue) Pop() (interface{}, bool) {
 	if q.Empty() {
 		return nil, false
 	}
-	front := (q.queueFront + 1) % len(q.array)
-	val := q.array[front]
-	q.array[front] = nil
-	q.queueFront = front
-	q.queueSize--
+	front := (q.QueueFront + 1) % len(q.Array)
+	val := q.Array[front]
+	q.Array[front] = nil
+	q.QueueFront = front
+	q.QueueSize--
 	return val, true
 }
 
 func (q *ArrayQueue) Push(val interface{}) bool {
-	if q.Size() == len(q.array)-1 {
-		q.array = append(q.array, make([]interface{}, len(q.array)))
+	if q.Size() == len(q.Array)-1 {
+		q.Array = append(q.Array, make([]interface{}, len(q.Array))...)
 	}
-	back := (q.queueBack + 1) % len(q.array)
-	q.array[back] = val
-	q.queueBack = back
-	q.queueSize++
+	back := (q.QueueBack + 1) % len(q.Array)
+	q.Array[back] = val
+	q.QueueBack = back
+	q.QueueSize++
 	return true
 }
