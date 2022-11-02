@@ -1,12 +1,12 @@
-package linkedstack_test
+package arraystack_test
 
 import (
-	linkedstack "data_structures/stack/linked_stack"
+	arraystack "data_structures/stack/array_stack"
 	"testing"
 )
 
 func TestStackPush(t *testing.T) {
-	stack := &linkedstack.LinkedStack{}
+	stack := &arraystack.ArrayStack{}
 	if get := stack.Empty(); get != true {
 		t.Errorf("Got %v expected %v", get, true)
 	}
@@ -16,20 +16,17 @@ func TestStackPush(t *testing.T) {
 	if get := stack.Size(); get != 3 {
 		t.Errorf("Got %v expected %v", get, 3)
 	}
-	val := 3
-	for node := stack.ChainNode; node != nil; node = node.Next {
-		if node.Val.(int) != val {
-			t.Errorf("Got %v expected %v", node.Val, val)
+	for i, get := range stack.Array {
+		if i+1 != get {
+			t.Errorf("Got %v expected %v", i+1, get)
 		}
-		val--
 	}
 }
-
 func TestStackTop(t *testing.T) {
-	stack := &linkedstack.LinkedStack{}
+	stack := &arraystack.ArrayStack{}
 	_, ok := stack.Top()
 	if ok {
-		t.Errorf("Got %v expect %v", ok, false)
+		t.Errorf("Got %v expect %v", true, false)
 	}
 	stack.Push(1)
 	stack.Push(2)
@@ -44,7 +41,7 @@ func TestStackTop(t *testing.T) {
 }
 
 func TestStackPop(t *testing.T) {
-	stack := &linkedstack.LinkedStack{}
+	stack := &arraystack.ArrayStack{}
 	_, ok := stack.Pop()
 	if ok {
 		t.Errorf("Got %v expect %v", ok, false)
