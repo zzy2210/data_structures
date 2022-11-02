@@ -27,14 +27,14 @@ func TestStackPush(t *testing.T) {
 
 func TestStackTop(t *testing.T) {
 	stack := &linkedstack.LinkedStack{}
-	get, ok := stack.Top()
+	_, ok := stack.Top()
 	if ok {
-		t.Errorf("Got %v expect %v", true, false)
+		t.Errorf("Got %v expect %v", ok, false)
 	}
 	stack.Push(1)
 	stack.Push(2)
 	stack.Push(3)
-	get, ok = stack.Top()
+	get, ok := stack.Top()
 	if !ok {
 		t.Errorf("Got %v expect %v", false, true)
 	}
@@ -45,14 +45,14 @@ func TestStackTop(t *testing.T) {
 
 func TestStackPop(t *testing.T) {
 	stack := &linkedstack.LinkedStack{}
-	get, ok := stack.Pop()
+	_, ok := stack.Pop()
 	if ok {
-		t.Errorf("Got %v expect %v", true, false)
+		t.Errorf("Got %v expect %v", ok, false)
 	}
 	stack.Push(1)
 	stack.Push(2)
 	stack.Push(3)
-	get, ok = stack.Pop()
+	get, ok := stack.Pop()
 	if !ok {
 		t.Errorf("Got %v expect %v", false, true)
 	}
