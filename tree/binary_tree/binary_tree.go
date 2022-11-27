@@ -60,10 +60,14 @@ func (t *BinaryTree) LevelOrder() {
 	queue := queue.LinkedQueue{}
 	node := t.Node
 
-	if node != nil {
+	for node != nil {
 		fmt.Println(node.Val)
-		queue.Push(node.Left)
-		queue.Push(node.Right)
+		if node.Left != nil {
+			queue.Push(node.Left)
+		}
+		if node.Right != nil {
+			queue.Push(node.Right)
+		}
 		queueNode, _ := queue.Pop()
 		node = queueNode.(*Node)
 	}
